@@ -5,7 +5,7 @@ class DateTimeView {
 
 	public function show() {
 
-		date_default_timezone_get('Europe/Stockholm');
+		date_default_timezone_set('Europe/Stockholm');
 
 		$time = date('H:i:s');
 		$year = date('Y');
