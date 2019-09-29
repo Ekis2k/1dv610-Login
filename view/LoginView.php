@@ -27,6 +27,10 @@ class LoginView {
 		return $response;
 	}
 
+	public function generateRegisterUser($queryString) {
+		return '<a href="?' . $queryString . '" name="Register a new user"></a>';
+	}
+
 	/**
 	* Generate HTML code on the output buffer for the logout button
 	* @param $message, String output message
