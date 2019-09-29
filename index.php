@@ -18,7 +18,7 @@ $rv = new RegisterView();
 
 session_start();
 
-$v->login();
+$v->generateLogin();
 if (isset($_SESSION['username'])) {
     if (isset($_GET['register'])) {
         $lv->render(true, $rv, $dtv);
