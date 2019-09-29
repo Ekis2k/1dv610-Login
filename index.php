@@ -16,6 +16,24 @@ $dtv = new DateTimeView();
 $lv = new LayoutView();
 $rv = new RegisterView();
 
+session_start();
 
-$lv->render(false, $v, $rv, $dtv);
+$v->login();
+if (isset($_SESSION['username'])) {
+    if (isset($_GET['register'])) {
+        $lv->render(true, $rv, $dtv);
+    } else {
+        $lv->render(true, $v, $dtv);
+    }
+} else {
+    if (isset($_GET['register'])) {
+        $lv->render(false,$rv, $dtv);
+    } else {
+        $lv->render(false, $v, $dtv);
+    }
+}
+
+if (isset($_POST['LoginView::Logout'])) {
+    unset($_SESSION['username']);
+}
 
