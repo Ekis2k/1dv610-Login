@@ -27,7 +27,7 @@ if (isset($_SESSION['username'])) {
     }
 } else {
     if (isset($_GET['register'])) {
-        $lv->render(false,$rv, $dtv);
+        $lv->render(false, $rv, $dtv);
     } else {
         $lv->render(false, $v, $dtv);
     }
