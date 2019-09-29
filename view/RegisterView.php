@@ -27,7 +27,7 @@ class RegisterView {
             }
         }
     }
-    public function response($message) {
+    public function response() {
         $this->register();
 
         return '
