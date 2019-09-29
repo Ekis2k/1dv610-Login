@@ -27,9 +27,9 @@ class RegisterView {
             }
         }
     }
-    private function printRegisterHTML($message) {
+    private function response($message) {
         $this->register();
-        
+
         return '
         <h2>Register new user</h2>
 			<form action="?register" method="post" enctype="multipart/form-data" > 
