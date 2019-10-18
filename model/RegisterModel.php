@@ -35,7 +35,7 @@ class RegisterModel {
             $this->message .= "Password do not match";
         }
     }
-    public function getMessagesRegister() {
+    public function getMessageRegister() {
         return $this->message;
     }
 }
