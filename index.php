@@ -13,28 +13,27 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
 //CREATE OBJECTS OF THE VIEWS
-$v = new LoginView();
-$dtv = new DateTimeView();
-$lv = new LayoutView();
-$rv = new RegisterView();
-$lc = new LoginController();
+$v = new \view\LoginView();
+$dtv = new \view\DateTimeView();
+$lv = new \view\LayoutView();
+$rv = new \view\RegisterView();
+$lc = new \controller\LoginController($v);
 
 session_start();
 
 $loginModel = $lc->userLogsIn();
 
-$v->generateLogin();
-if (isset($_SESSION['username'])) {
+if ($loginModel->isLoggedIn()) {
     if (isset($_GET['register'])) {
-        $lv->render(true, $rv, $dtv);
+        $lv->render($loginModel, $rv, $dtv);
     } else {
-        $lv->render(true, $v, $dtv);
+        $lv->render($loginModel, $v, $dtv);
     }
 } else {
     if (isset($_GET['register'])) {
         $lv->render(false, $rv, $dtv);
     } else {
-        $lv->render(false, $v, $dtv);
+        $lv->render($loginModel, $v, $dtv);
     }
 }
 

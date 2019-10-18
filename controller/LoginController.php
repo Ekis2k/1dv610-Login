@@ -17,7 +17,6 @@ class LoginController {
             $passwordView = $this->loginView->setRequestPassword();
             $this->loginModel->getUsername($usernameView);
             $this->loginModel->getPassword($passwordView);
-            $this->handleMessage();
             $this->loginModel->checkPassword($passwordView, $usernameView);
             $this->handleMessage();
             $this->loginModel->checkUsername($usernameView, $passwordView);

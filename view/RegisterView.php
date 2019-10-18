@@ -1,5 +1,7 @@
 <?php
 
+namespace view;
+
 class RegisterView {
     private static $login = 'RegisterView::UserName';
     private static $messageId = 'RegisterView::Message';
@@ -7,25 +9,30 @@ class RegisterView {
     private static $checkPassword = 'RegisterView::PasswordRepeat';
     private static $register = 'RegisterView::Register';
     private static $usernameStay = '';
+    private $registerModel;
     private $message = '';
 
-    public function register(){
-        if(isset($_POST[self::$register])) {
-            if(strlen($_POST[self::$login]) < 3) {
-                $this->message .= 'Username has too few characters, at least 3 characters.';
-                $this->setUsername();
-            }
-            if (strlen($_POST[self::$password]) < 6) {
-                $this->message .= '<br>Password has too few characters, at least 6 characters.';
-                if (strlen($_POST[self::$login]) > 3) {
-                    $this->setUsername();
-                }
-            }
-            if ($_POST[self::$password] != $_POST[self::$checkPassword]) {
-                $this->message .= 'Passwords do not match.';
-                $this->setUsername();
-            }
-        }
+    public function setRegisterMessage($message) {
+        $this->message = $message;
+    }
+
+    public function getTheUsername() {
+        $input = $_POST[self::$login];
+        return self::$usernameStay = $input;
+    }
+
+    public function getThePassoword() {
+        return $_POST[self::$password];
+    }
+    public function getConfirmedPassword() {
+        return $_POST[self::$checkPassword];
+    }
+    public function userPressedRegister() {
+        return isset($_POST[self::$register]);
+    }
+
+    public function register() {
+        return isset($_GET['register']);
     }
     public function response() {
         $this->register();
@@ -51,10 +58,6 @@ class RegisterView {
 				</fieldset>
 			</form>
 		';
-    }
-    private function setUsername() {
-        $input = $_POST[self::$login];
-        return self::$usernameStay = $input;
     }
     private function renderLoggedIn($isLoggedIn) {
         if ($isLoggedIn) {

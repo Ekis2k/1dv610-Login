@@ -1,9 +1,10 @@
 <?php
 
+namespace view;
 
 class LayoutView {
   
-  public function render($isLoggedIn, $v, DateTimeView $dtv) {
+  public function render($loginModel, $v, DateTimeView $dtv) {
     echo '<!DOCTYPE html>
       <html>
         <head>
@@ -14,10 +15,10 @@ class LayoutView {
           <h1>Assignment 2</h1>
           ' . $this->newRegister() . '
 
-          ' . $this->renderIsLoggedIn($isLoggedIn) . '
+          ' . $this->renderIsLoggedIn($loginModel->isLoggedIn()) . '
           
           <div class="container">
-              ' . $v->response() . '
+              ' . $v->response($loginModel) . '
               
               ' . $dtv->show() . '
           </div>
