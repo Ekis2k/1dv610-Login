@@ -1,5 +1,7 @@
 <?php
 
+namespace view;
+
 class LoginView {
 	private static $login = 'LoginView::Login';
 	private static $logout = 'LoginView::Logout';
@@ -9,61 +11,22 @@ class LoginView {
 	private static $cookiePassword = 'LoginView::CookiePassword';
 	private static $keep = 'LoginView::KeepMeLoggedIn';
 	private static $messageId = 'LoginView::Message';
-	public static $keepUsername = '';
+	private static $keepUsername = '';
 	private $message = '';
+	private $sessionUsername;
+	private $sessionPassword;
+	private $loginModel;
 
-	public function generateLogin() {
-		$hash = password_hash("Password", PASSWORD_DEFAULT);
-		if (isset($_POST[self::$name]) || isset($_POST[self::$password])) {
-			$response = '';
-			if ($_POST[self::$name] == 'Admin' && password_verify($_POST[self::$password], $hash)) {
-				if (!isset($_SESSION['username']) && !isset($_SESSION['password'])) {
-					$this->message = "Welcome";
-				}
-				$_SESSION['username'] = $_POST[self::$name];
-				$_SESSION['password'] = $hash;
+	public function setMessage($message) {
+		$this->message = $message;
+	}
 
-				if (isset($_POST[self::$keep])) {
-					$this->keepLoggedIn();
-					$this->message = "Welcome and you will be remembered";
-				}
-				$response = $this->generateLogoutButtonHTML($this->message);
-				return $response;
-			} else {
-				$this->message = "Wrong name or password";
-			}
-			if ($_POST[self::$password] == '') {
-				$this->getRequestUserName();
-				$this->message = "Password is missing";
-			}
+	public function setSessionUsername($sessionUsername) {
+		$this->sessionUsername = $sessionUsername;
+	}
 
-			if ($_POST[self::$name] == '') {
-				$this->message = "Username is missing";
-			}
-		} else if (isset($_COOKIE[self::$cookieName]) && isset($_COOKIE[self::$cookiePassword])) {
-			if ($_COOKIE[self::$cookieName] == 'Admin' && password_verify("Password", $_COOKIE[self::$cookiePassword])) {
-				if (!isset($_SESSION['username']) && !isset($_SESSION['password'])) {
-					$this->message = "Welcome back with cookie";
-				}
-				$_SESSION['username'] = $_COOKIE[self::$cookieName];
-				$_SESSION['passoword'] = $_COOKIE[self::$cookiePassword];
-			} else {
-				$this->message = "Wrong information in cookies";
-				setcookie(self::$cookieName, '', time()+3600);
-				setcookie(self::$cookiePassword, '', time()+3600);
-			}
-		}
-		if (isset($_POST[self::$logout])) {
-			if (isset($_SESSION['username']) && isset($_SESSION['password'])) {
-				$this->message = "Bye bye!";
-			}
-			session_unset();
-			setcookie(self::$cookieName, '', time()-3600);
-			setcookie(self::$cookiePassword, '', time()-3600);
-		}
-		if (isset($_SESSION['username'])) {
-			$this->generateLogoutButtonHTML($this->message);
-		}
+	public function setSessionPassword($sessionPassword) {
+		$this->sessionPassword = $sessionPassword;
 	}
 
 	/**
@@ -73,8 +36,9 @@ class LoginView {
 	 *
 	 * @return  void BUT writes to standard output and cookies!
 	 */
-	public function response() {
-		if (isset($_SESSION['username'])) {
+	public function response($loginModel) {
+		$this->loginModel = $loginModel;
+		if ($loginModel->isLoggedIn()) {
 			return $this->generateLogoutButtonHTML($this->message);
 		} else {
 			return $this->generateLoginFormHTML($this->message);
@@ -121,15 +85,45 @@ class LoginView {
 			</form>
 		';
 	}
-	
-	//CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
-	private function getRequestUserName() {
-		$input = $_POST[self::$name];
-		return self::$keepUsername = $input;
+	public function userPressedLogin() {
+		return isset($_POST[self::$login]);
 	}
-	private function keepLoggedIn() {
-		setcookie(self::$cookieName, $_SESSION['username'], time()+3600);
-		setcookie(self::$cookiePassword, $_SESSION['password'], time()+3600);
+	public function userPressedLogout() {
+		return isset($_POST[self::$logout]);
 	}
 	
+	public function setRequestUsername() {
+		if (isset($_POST[self::$name])) {
+			$inputUser = $_POST[self::$name];
+			self::$keepUsername = $inputUser;
+			return $inputUser;
+		}
+	}
+	public function setRequestPassword() {
+		if (isset($_POST[self::$password])) {
+			return $_POST[self::$password];
+		}
+	}
+
+	public function keepMeLoggedIn() {
+		setcookie(self::$cookieName, $this->sessionUsername, time()+3600);
+		setcookie(self::$cookiePassword, $this->sessionPassword, time()+3600);
+		$this->message = 'Welcome and you will be remembered';
+	}
+
+	public function getNameCookie() {
+		if (isset($_COOKIE[self::$cookieName])) {
+		return $_COOKIE[self::$cookieName];
+		}
+	}
+
+	public function getPasswordCookie() {
+		if (isset($_COOKIE[self::$cookiePassword])) {
+		return $_COOKIE[self::$cookiePassword];
+		}
+	}
+	public function unsetCookies() {
+		setcookie(self::$cookieName, '', time()-3600);
+		setcookie(self::$cookiePassword, '', time()-3600);
+	}
 }
