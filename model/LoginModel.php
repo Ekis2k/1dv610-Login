@@ -80,7 +80,7 @@ class LoginModel {
     }
     public function logout() {
         if ($this->isLoggedIn() == true) {
-            $this->message = "Goodbye!";
+            $this->message = "Bye bye!";
         }
         unset($_SESSION['username']);
         unset($_SESSION['password']);

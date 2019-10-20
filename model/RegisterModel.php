@@ -24,15 +24,15 @@ class RegisterModel {
 
     public function checkUsername() {
         if (strlen($this->usernameRegister) < 3) {
-            $this->message .= "Username has too few characters, at least 3 characters";
+            $this->message = "Username has too few characters, at least 3 characters";
         }
     }
     public function checkPassword() {
         if (strlen($this->passwordRegister) < 6) {
-            $this->message .= "<br>Password has too few characters, at least 6 characters";
+            $this->message = "Password has too few characters, at least 6 characters";
         }
         if ($this->passwordRegister != $this->passwordCheck) {
-            $this->message .= "Password do not match";
+            $this->message = "Password do not match";
         }
     }
     public function getMessageRegister() {
