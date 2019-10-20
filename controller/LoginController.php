@@ -21,6 +21,8 @@ class LoginController {
             $this->handleMessage();
             $this->loginModel->checkUsername($usernameView, $passwordView);
             $this->handleMessage();
+            $this->loginModel->login($usernameView, $passwordView);
+            $this->handleMessage();
 
             $this->keepIn();
         } else if ($this->loginView->userPressedLogout()) {
@@ -37,15 +39,16 @@ class LoginController {
         }
         return $this->loginModel;
     }
+
     public function keepIn() {
-        if ($this->loginView->userPressedLogin()) {
+        if ($this->loginView->keepInButton()) {
             $sessionUsername = $this->loginModel->getSessionUsername();
             $sessionPassword = $this->loginModel->getSessionPassword();
-
+            
             $this->loginView->setSessionUsername($sessionUsername);
             $this->loginView->setSessionPassword($sessionPassword);
             $this->loginView->keepMeLoggedIn();
-        }
+        } 
     }
 
     public function handleMessage() {

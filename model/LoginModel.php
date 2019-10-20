@@ -28,7 +28,7 @@ class LoginModel {
             $this->message = "Password is missing";
         }
     }
-    public function checkUsername($passwordView, $usernameView) {
+    public function checkUsername($usernameView, $passwordView) {
         if ($usernameView == '' && $passwordView = '') {
             $this->message = "Username is missing";
         } else if ($usernameView == '') {
@@ -68,6 +68,13 @@ class LoginModel {
         }
     }
 
+    public function getSessionUsername() {
+        return $_SESSION['username'];
+    }
+    public function getSessionPassword() {
+        return $_SESSION['password'];
+    }
+
     public function isLoggedIn() {
         return isset($_SESSION['username']);
     }
@@ -77,13 +84,6 @@ class LoginModel {
         }
         unset($_SESSION['username']);
         unset($_SESSION['password']);
-    }
-
-    public function getSessionUsername() {
-        return $_SESSION['username'];
-    }
-    public function getSessionPassword() {
-        return $_SESSION['password'];
     }
 
 }

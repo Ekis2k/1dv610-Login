@@ -35,7 +35,6 @@ class RegisterView {
         return isset($_GET['register']);
     }
     public function response() {
-        $this->register();
 
         return '
         <h2>Register new user</h2>

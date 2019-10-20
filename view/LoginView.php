@@ -28,6 +28,50 @@ class LoginView {
 	public function setSessionPassword($sessionPassword) {
 		$this->sessionPassword = $sessionPassword;
 	}
+	public function userPressedLogin() {
+		return isset($_POST[self::$login]);
+	}
+	public function userPressedLogout() {
+		return isset($_POST[self::$logout]);
+	}
+	
+	public function setRequestUsername() {
+		if (isset($_POST[self::$name])) {
+			$inputUser = $_POST[self::$name];
+			self::$keepUsername = $inputUser;
+			return $inputUser;
+		}
+	}
+	public function setRequestPassword() {
+		if (isset($_POST[self::$password])) {
+			return ($_POST[self::$password]);
+		}
+	}
+	public function keepInButton() {
+		return isset($_POST[self::$keep]);
+	}
+
+	public function keepMeLoggedIn() {
+		setcookie(self::$cookieName, $this->sessionUsername, time()+3600);
+		setcookie(self::$cookiePassword, $this->sessionPassword, time()+3600);
+		$this->message = 'Welcome and you will be remembered';
+	}
+
+	public function getNameCookie() {
+		if (isset($_COOKIE[self::$cookieName])) {
+		return $_COOKIE[self::$cookieName];
+		}
+	}
+
+	public function getPasswordCookie() {
+		if (isset($_COOKIE[self::$cookiePassword])) {
+		return $_COOKIE[self::$cookiePassword];
+		}
+	}
+	public function unsetCookies() {
+		setcookie(self::$cookieName, '', time()-3600);
+		setcookie(self::$cookiePassword, '', time()-3600);
+	}
 
 	/**
 	 * Create HTTP response
@@ -84,46 +128,5 @@ class LoginView {
 				</fieldset>
 			</form>
 		';
-	}
-	public function userPressedLogin() {
-		return isset($_POST[self::$login]);
-	}
-	public function userPressedLogout() {
-		return isset($_POST[self::$logout]);
-	}
-	
-	public function setRequestUsername() {
-		if (isset($_POST[self::$name])) {
-			$inputUser = $_POST[self::$name];
-			self::$keepUsername = $inputUser;
-			return $inputUser;
-		}
-	}
-	public function setRequestPassword() {
-		if (isset($_POST[self::$password])) {
-			return $_POST[self::$password];
-		}
-	}
-
-	public function keepMeLoggedIn() {
-		setcookie(self::$cookieName, $this->sessionUsername, time()+3600);
-		setcookie(self::$cookiePassword, $this->sessionPassword, time()+3600);
-		$this->message = 'Welcome and you will be remembered';
-	}
-
-	public function getNameCookie() {
-		if (isset($_COOKIE[self::$cookieName])) {
-		return $_COOKIE[self::$cookieName];
-		}
-	}
-
-	public function getPasswordCookie() {
-		if (isset($_COOKIE[self::$cookiePassword])) {
-		return $_COOKIE[self::$cookiePassword];
-		}
-	}
-	public function unsetCookies() {
-		setcookie(self::$cookieName, '', time()-3600);
-		setcookie(self::$cookiePassword, '', time()-3600);
 	}
 }
