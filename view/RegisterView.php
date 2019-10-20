@@ -44,7 +44,7 @@ class RegisterView {
 					<p id="' . self::$messageId . '">' . $this->message . '</p>
 					
 					<label for="' . self::$login . '">Username :</label>
-					<input type="text" size="20" id="' . self::$login . '" name="' . self::$login . '" value="' . self::$usernameStay . '" />
+					<input type="text" size="20" id="' . self::$login . '" name="' . self::$login . '" value="abc" />
                     <br>
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" size="20" id="' . self::$password . '" name="' . self::$password . '" value="" />
