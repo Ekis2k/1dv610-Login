@@ -34,7 +34,7 @@ class RegisterModel {
             $this->message = "Password has too few characters, at least 6 characters.";
         }
         if ($this->passwordRegister != $this->passwordCheck) {
-            $this->message = "Password do not match.";
+            $this->message = "Passwords do not match.";
         }
     }
     public function getMessageRegister() {
