@@ -4,7 +4,7 @@ namespace view;
 
 class LayoutView {
   
-  public function render($loginModel, $v, DateTimeView $dtv) {
+  public function render($loginModel, $v, DateTimeView $dtv, $list) {
     echo '<!DOCTYPE html>
       <html>
         <head>
@@ -19,6 +19,7 @@ class LayoutView {
           
           <div class="container">
               ' . $v->response($loginModel) . '
+              ' . $list . '
               
               ' . $dtv->show() . '
           </div>

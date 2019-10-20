@@ -20,7 +20,7 @@ class ListView {
         return $input;
     }
 
-    public function getAnswer() {
+    public function getAnswer($answer) {
         $this->answer = $answer;
     }
 
@@ -46,9 +46,9 @@ class ListView {
             <fieldset>
             <p id="' . self::$messageId . '">' . $this->message . '</p>
             <label for="' . self::$list . '"></label>
-            <input type"text" id="' . self::$list . '" name="' . self::$list .'"/>
-            <input type"submit" id="submit" name="' . self::$remind .'" value="Add"/>
-            <input type"submit" id="submit2" name="' . self::$show .'" value="Show List"/>
+            <input type="text" id="' . self::$list . '" name="' . self::$list .'"/>
+            <input type="submit" id="submit" name="' . self::$remind .'" value="Add" />
+            <input type="submit" id="submit2" name="' . self::$show .'" value="Show List" />
             <br>
             </fieldset>
             </form>

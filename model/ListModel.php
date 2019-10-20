@@ -32,4 +32,13 @@ class ListModel {
             $this->message = 'You need to login';
         }
     }
+
+    public function checkShow() {
+        if ($this->checkIfUserIsLoggedIn() == true) {
+            return true;
+        } else {
+            $this->message = 'You need to login';
+            return false;
+        }
+    }
 }
