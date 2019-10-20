@@ -19,6 +19,7 @@ class RegisterController {
             $this->registerModel->checkPassword();
             $this->handleMessages();
         }
+        return $this->registerModel;
     }
 
     public function setValues() {
@@ -32,6 +33,6 @@ class RegisterController {
 
     public function handleMessages() {
         $message = $this->registerModel->getMessageRegister();
-        $this->registerView->setRegisterMessage();
+        $this->registerView->setRegisterMessage($message);
     }
 }

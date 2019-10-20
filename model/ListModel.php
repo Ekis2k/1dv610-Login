@@ -24,8 +24,8 @@ class ListModel {
     public function writeFile() {
         if ($this->checkIfUserIsLoggedIn() == true) {
             $myFile = 'list.txt';
-            $handle = \fopen($myFile, 'a') or die("Could'nt open the file");
-            $data = "<br>" . "*" . $this->textboxValue;
+            $handle = \fopen($myFile, 'a');
+            $data = "<br>" . "* " . $this->textboxValue;
             fwrite($handle, $data);
             $this->message = 'Saved!';
         } else {

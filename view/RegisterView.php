@@ -21,7 +21,7 @@ class RegisterView {
         return self::$usernameStay = $input;
     }
 
-    public function getThePassoword() {
+    public function getThePassword() {
         return $_POST[self::$password];
     }
     public function getConfirmedPassword() {
