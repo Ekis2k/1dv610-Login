@@ -19,7 +19,7 @@ class LayoutView {
           
           <div class="container">
               ' . $v->response($loginModel) . '
-              ' . $list . '
+              ' . $list->listHTML() . '
               
               ' . $dtv->show() . '
           </div>

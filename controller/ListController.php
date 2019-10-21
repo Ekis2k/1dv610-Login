@@ -20,14 +20,14 @@ class ListController {
             $message = $this->listModel->getMessage();
             $this->listView->setMessage($message);
         } else {
-            
+            $this->userGonnaShow();
         }
     }
-    public function userShow() {
+    public function userGonnaShow() {
         if ($this->listView->userShow()) {
             $answer = $this->listModel->checkShow();
             $this->listView->getAnswer($answer);
-            $this->listView->showFile();
+            $this->listView->showListForm();
             $message = $this->listModel->getMessage();
             $this->listView->setMessage($message);
         }

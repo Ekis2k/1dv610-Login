@@ -35,7 +35,8 @@ class ListView {
     public function showFile() {
         if ($this->$answer == true) {
             $myfile = 'list.txt';
-            return \file_get_contents($myfile);
+            $listitems = file_get_contents($myfile);
+            return $listitems;
         }
     }
 
@@ -56,11 +57,16 @@ class ListView {
     }
 
     public function showListForm() {
+        $items = $this->showFile();
         if ($this->answer == true) {
             return 
                 '<h2>List:</h2>
                 <fieldset>
-                    <p id="' . self::$noteId . '">' . $this->showFile() . '</p>
+                    <p id="' . self::$noteId . '">
+                    
+                    ' . $items . '
+                    
+                    </p>
                 </fieldset>
                 ';
         }

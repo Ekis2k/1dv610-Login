@@ -43,19 +43,18 @@ class Application {
         $loginModel = $this->lc->userLogsIn();
         $registerModel = $this->rc->userRegister();
         $listModel = $this->lstc->userAddListitem();
-        $listView = $this->lstv->listHTML();
 
         if ($loginModel->isLoggedIn()) {
             if ($this->rv->register()) {
-                $this->lv->render($loginModel, $this->v, $this->dtv, $listView);
+                $this->lv->render($loginModel, $this->v, $this->dtv, $this->lstv);
             } else {
-                $this->lv->render($loginModel, $this->v, $this->dtv, $listView);
+                $this->lv->render($loginModel, $this->v, $this->dtv, $this->lstv);
             }
         } else {
             if ($this->rv->register()) {
-                $this->lv->render($registerModel, $this->rv, $this->dtv, $listView);
+                $this->lv->render($registerModel, $this->rv, $this->dtv, $this->lstv);
             } else {
-                $this->lv->render($loginModel, $this->v, $this->dtv, $listView);
+                $this->lv->render($loginModel, $this->v, $this->dtv, $this->lstv);
             }
         }
     }
