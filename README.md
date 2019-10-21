@@ -34,6 +34,24 @@ UC1 and UC5 - User is logged in and has items in the list.
 1. A user has added items to the list
 2. The list is being showed the list
 
+## UC7 - Logged out Denied Add
+
+### __Precondition__
+User has to be logged out of the application.
+
+## __Main Scenario__
+1. A user is trying to add items when being logged out.
+2. The user should be denied access.
+
+## UC8 - Logged out Denied Show
+
+### __Precondition__
+User has to be logged out of the application.
+
+## __Main Scenario__
+1. A user is trying to Show all the items when being logged out.
+2. The user should be denied access.
+
 # Test Cases
 
 [TC1-TC4](https://github.com/dntoll/1dv610/blob/master/assignments/A2_resources/TestCases.md)
